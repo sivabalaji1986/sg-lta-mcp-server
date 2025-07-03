@@ -18,6 +18,9 @@
         <mapstruct.version>1.6.3</mapstruct.version>
         <build-helper.version>3.6.1</build-helper.version>
         <maven-copiler-plugin.version>3.14.0</maven-copiler-plugin.version>
+        <jakarta.annotation.version>3.0.0</jakarta.annotation.version>
+        <openapitools.jackson.version>0.2.6</openapitools.jackson.version>
+        <io.github.openfeign.version>13.6</io.github.openfeign.version>
     </properties>
     <dependencies>
         <dependency>
@@ -29,6 +32,31 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
             <version>${spring-cloud.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>${jakarta.annotation.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>${openapitools.jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-core</artifactId>
+            <version>${io.github.openfeign.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-jackson</artifactId>
+            <version>${io.github.openfeign.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-slf4j</artifactId>
+            <version>${io.github.openfeign.version}</version>
         </dependency>
     </dependencies>
     <build>
