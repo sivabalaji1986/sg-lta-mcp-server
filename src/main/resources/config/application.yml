@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: sg-lta-mcp-server
+
+server:
+  port: 8689
+  servlet:
+    contextPath: /mcp
+
+sg-lta:
+  base-url: http://localhost:8688
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health  # Only expose /actuator/health
+  endpoint:
+    health:
+      show-details: never
