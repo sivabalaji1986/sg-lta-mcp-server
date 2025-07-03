@@ -26,6 +26,7 @@
         <cloud.version>2025.0.0</cloud.version>
         <io.swagger.core.v3.version>2.2.31</io.swagger.core.v3.version>
         <jakarta.validation.version>3.1.1</jakarta.validation.version>
+        <springcloud.starter.version>4.3.0</springcloud.starter.version>
     </properties>
     <dependencies>
         <dependency>
@@ -71,6 +72,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>${springcloud.starter.version}</version>
         </dependency>
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
@@ -118,16 +120,14 @@
                             <apiPackage>com.hbs.mcp.generated.api</apiPackage>
                             <modelPackage>com.hbs.mcp.generated.model</modelPackage>
                             <configOptions>
-                                <useFeignClientUrl>true</useFeignClientUrl>
-                                <feignClient>true</feignClient>
                                 <useJakartaEe>true</useJakartaEe>
+                                <dateLibrary>java8</dateLibrary>
+                                <!-- FIXME - Interfaces are not getting created automatically with @FeignClient. Check this -->
+                                <useFeignClient>true</useFeignClient>
                                 <interfaceOnly>true</interfaceOnly>
-                                <useTags>true</useTags>
+                                <useFeignClientContextId>true</useFeignClientContextId>
                             </configOptions>
-                            <generateApiTests>false</generateApiTests>
-                            <generateModelTests>false</generateModelTests>
-                            <generateModelDocumentation>false</generateModelDocumentation>
-                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <output>${project.build.directory}/generated-sources/openapi</output>
                         </configuration>
                     </execution>
                 </executions>
