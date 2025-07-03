@@ -27,6 +27,7 @@
         <io.swagger.core.v3.version>2.2.31</io.swagger.core.v3.version>
         <jakarta.validation.version>3.1.1</jakarta.validation.version>
         <springcloud.starter.version>4.3.0</springcloud.starter.version>
+        <spring.ai.starter.mcp.server.version>1.0.0</spring.ai.starter.mcp.server.version>
     </properties>
     <dependencies>
         <dependency>
@@ -89,9 +90,31 @@
             <artifactId>jakarta.validation-api</artifactId>
             <version>${jakarta.validation.version}</version>
         </dependency>
+
+        <!-- Below dependency is suitable for local, command-line and desktop integrations: STDIO (Standard Input/Output) -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-mcp-server</artifactId>
+            <version>${spring.ai.starter.mcp.server.version}</version>
+        </dependency>
+
+        <!-- Uncomment the following dependency if you require HTTP/SSE transport (for web-based integration): HTTP + SSE (Server-Sent Events) -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.ai</groupId>-->
+<!--            <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>-->
+<!--            <version>${spring.ai.starter.mcp.server.version}</version>-->
+<!--        </dependency>-->
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring.ai.starter.mcp.server.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
