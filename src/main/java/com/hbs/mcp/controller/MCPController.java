@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/mcp")
+@RequestMapping("/mcp")
 public class MCPController {
 
     @Autowired
@@ -15,6 +15,6 @@ public class MCPController {
 
     @GetMapping("/predict")
     public ResponseEntity<LTABusStopResponse> predict(@RequestParam int busStopCode, @RequestParam String serviceNo) {
-        return ResponseEntity.ok(busArrivalsApi.getBusStopTimings(busStopCode, serviceNo));
+        return busArrivalsApi.getBusStopTimings(busStopCode, serviceNo);
     }
 }
