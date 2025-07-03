@@ -23,6 +23,9 @@
         <io.github.openfeign.version>13.6</io.github.openfeign.version>
         <io.github.openfeign.form.version>3.8.0</io.github.openfeign.form.version>
         <junit.jupiter.version>5.13.2</junit.jupiter.version>
+        <cloud.version>2025.0.0</cloud.version>
+        <io.swagger.core.v3.version>2.2.31</io.swagger.core.v3.version>
+        <jakarta.validation.version>3.1.1</jakarta.validation.version>
     </properties>
     <dependencies>
         <dependency>
@@ -65,7 +68,37 @@
             <artifactId>junit-jupiter</artifactId>
             <version>${junit.jupiter.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${io.swagger.core.v3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-models</artifactId>
+            <version>${io.swagger.core.v3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>${jakarta.validation.version}</version>
+        </dependency>
     </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <plugins>
             <plugin>
@@ -80,17 +113,21 @@
                         </goals>
                         <configuration>
                             <inputSpec>${project.basedir}/src/main/resources/openapi-spec.json</inputSpec>
-                            <generatorName>java</generatorName>
-                            <library>feign</library>
+                            <generatorName>spring</generatorName>
+                            <library>spring-cloud</library>
                             <apiPackage>com.hbs.mcp.generated.api</apiPackage>
                             <modelPackage>com.hbs.mcp.generated.model</modelPackage>
                             <configOptions>
-                                <dateLibrary>java8</dateLibrary>
-                                <useFeignClient>true</useFeignClient>
-                                <interfaceOnly>true</interfaceOnly>
+                                <useFeignClientUrl>true</useFeignClientUrl>
+                                <feignClient>true</feignClient>
                                 <useJakartaEe>true</useJakartaEe>
+                                <interfaceOnly>true</interfaceOnly>
+                                <useTags>true</useTags>
                             </configOptions>
-                            <output>${project.build.directory}/generated-sources/openapi</output>
+                            <generateApiTests>false</generateApiTests>
+                            <generateModelTests>false</generateModelTests>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateApiDocumentation>false</generateApiDocumentation>
                         </configuration>
                     </execution>
                 </executions>
