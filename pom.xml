@@ -81,6 +81,7 @@
                                 <dateLibrary>java8</dateLibrary>
                                 <useFeignClient>true</useFeignClient>
                                 <interfaceOnly>true</interfaceOnly>
+                                <useJakartaEe>true</useJakartaEe>
                             </configOptions>
                             <output>${project.build.directory}/generated-sources/openapi</output>
                         </configuration>
