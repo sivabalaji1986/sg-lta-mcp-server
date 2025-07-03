@@ -1,0 +1,130 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8688/api",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Bus Arrivals",
+      "description": "Get real-time bus timings"
+    }
+  ],
+  "paths": {
+    "/bus-arrivals": {
+      "get": {
+        "tags": [
+          "Bus Arrivals"
+        ],
+        "summary": "Get bus timings by stop and service number",
+        "operationId": "getBusStopTimings",
+        "parameters": [
+          {
+            "name": "busStopCode",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "serviceNo",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/LTABusStopResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LTABusStopResponse": {
+        "type": "object",
+        "description": "Response containing real-time arrival info for a specific bus stop",
+        "properties": {
+          "BusStopCode": {
+            "type": "string",
+            "description": "Bus stop code"
+          },
+          "Services": {
+            "type": "array",
+            "description": "List of available bus services at this stop",
+            "items": {
+              "$ref": "#/components/schemas/LTAService"
+            }
+          }
+        }
+      },
+      "LTANextBus": {
+        "type": "object",
+        "description": "Bus arrival timing details",
+        "properties": {
+          "EstimatedArrival": {
+            "type": "string",
+            "description": "Estimated arrival time in ISO 8601 format"
+          },
+          "VisitNumber": {
+            "type": "string",
+            "description": "Visit number of the bus at this stop"
+          },
+          "Load": {
+            "type": "string",
+            "description": "Passenger load: SEA = Seats Available, SDA = Standing Available, LSD = Limited Standing"
+          },
+          "Feature": {
+            "type": "string",
+            "description": "Bus feature: WAB = Wheelchair Accessible Bus"
+          },
+          "Type": {
+            "type": "string",
+            "description": "Bus type: SD = Single Deck, DD = Double Deck"
+          }
+        }
+      },
+      "LTAService": {
+        "type": "object",
+        "description": "Bus service details with upcoming arrivals",
+        "properties": {
+          "ServiceNo": {
+            "type": "string",
+            "description": "Bus service number"
+          },
+          "NextBus": {
+            "$ref": "#/components/schemas/LTANextBus",
+            "description": "Next arriving bus for the service"
+          },
+          "NextBus2": {
+            "$ref": "#/components/schemas/LTANextBus",
+            "description": "Second arriving bus for the service"
+          },
+          "NextBus3": {
+            "$ref": "#/components/schemas/LTANextBus",
+            "description": "Third arriving bus for the service"
+          }
+        }
+      }
+    }
+  }
+}
